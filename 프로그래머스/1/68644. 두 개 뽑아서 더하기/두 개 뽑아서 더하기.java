@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.stream.*;
 
 class Solution {
-    public int[] solution(int[] numbers) {
+    public ArrayList<Integer> solution(int[] numbers) {
         ArrayList<Integer> list = new ArrayList<>();
         
         for(int i = 0; i < numbers.length; i ++)
@@ -16,8 +16,6 @@ class Solution {
         
         list.sort(Comparator.naturalOrder());
 
-        return list.stream()
-                   .mapToInt(Integer::intValue)
-                   .toArray();
+        return list;
     }
 }
