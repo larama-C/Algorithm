@@ -1,26 +1,24 @@
 class Solution {
     public int solution(int number, int limit, int power) {
         int answer = 0;
-
-        for (int i = 1; i <= number; i++) {
-            int count = calculator(i);
-            answer += (count > limit) ? power : count;
-        }
-
-        return answer;
-    }
-
-    public int calculator(int i)
-    {
-        int cnt = 0;
-        for(int j = 1; j * j <= i; j++)
+        int[] arr = new int[number];
+        for(int i = 1; i <= number; i++)
         {
-            if(i % j == 0)
+            for(int j = 1; j <= i; j++)
             {
-                cnt+= (j * j == i) ? 1 : 2;
+                if(i % j == 0)
+                {
+                    arr[i - 1]++;
+                }
             }
+            if(arr[i- 1] > limit)
+            {
+                arr[i - 1] = power;
+            }
+            
+            answer += arr[i - 1];
         }
         
-        return cnt;
+        return answer;
     }
 }
