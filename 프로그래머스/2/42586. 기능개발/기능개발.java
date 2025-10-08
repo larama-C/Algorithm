@@ -2,30 +2,27 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
-        int[] answer = {};
+        Stack<Integer> stack = new Stack<>();
         
-        Queue<Integer> q = new LinkedList<>();
-        
-        for(int i = 0; i < progresses.length; i++) {
+        for (int i = progresses.length - 1; i >= 0; i--) {
             int remain = 100 - progresses[i];
             int days = (int)Math.ceil((double)remain / speeds[i]);
-            q.offer(days);
+            stack.push(days);
         }
-        
+
         List<Integer> result = new ArrayList<>();
-        
-        while(!q.isEmpty()) {
-            int standard = q.poll();
+
+        while (!stack.isEmpty()) {
+            int standard = stack.pop();
             int cnt = 1;
-            
-            while(!q.isEmpty() && q.peek() <= standard) {
-                q.poll();
+
+            while (!stack.isEmpty() && stack.peek() <= standard) {
+                stack.pop();
                 cnt++;
             }
-            
             result.add(cnt);
         }
-        
+
         return result.stream().mapToInt(i -> i).toArray();
     }
 }
