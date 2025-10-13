@@ -1,26 +1,16 @@
-import java.util.*;
-
 class Solution {
     public int solution(int[] numbers, int target) {
-        int answer = 0;
-        Stack<int[]> stack = new Stack<>();
+        return dfs(numbers, target, 0, 0);
+    }
 
-        stack.push(new int[]{0, 0});
-
-        while (!stack.isEmpty()) {
-            int[] cur = stack.pop();
-            int idx = cur[0];
-            int sum = cur[1];
-
-            if (idx == numbers.length) {
-                if (sum == target) answer++;
-                continue;
-            }
-            
-            stack.push(new int[]{idx + 1, sum + numbers[idx]});
-            stack.push(new int[]{idx + 1, sum - numbers[idx]});
+    private int dfs(int[] numbers, int target, int idx, int sum) {
+        if (idx == numbers.length) {
+            return sum == target ? 1 : 0;
         }
 
-        return answer;
+        int plus = dfs(numbers, target, idx + 1, sum + numbers[idx]);
+        int minus = dfs(numbers, target, idx + 1, sum - numbers[idx]);
+
+        return plus + minus;
     }
 }
