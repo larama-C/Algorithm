@@ -13,5 +13,5 @@ jobs:
        uses: peter-evans/repository-dispatch@v1
        with:
          token: ${{ secrets.GH_PAT }}
-         repository: {larama-C}/{programmers-badge}
+         repository: larama-C/programmers-badge
          event-type: trigger-workflow
